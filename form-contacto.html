@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    <style>
+        body {
+
+  justify-content: center;
+  background-image: linear-gradient(135deg,  rgb(220, 207, 177), rgb(179, 138, 86),rgb(107, 63, 13), rgb(49, 23, 0));
+  background-size: 500%;
+  height: 100vh;
+  animation: animacion 10s infinite;
+}
+@keyframes animacion{
+  0%{
+      background-position: 0% 50%;
+  }
+  50%{
+      background-position: 100% 50%;
+  }
+  100%{
+      background-position: 0% 50%;
+  }
+}
+        .container {
+            background-color: white;
+            max-width: 500px;
+            margin: 50px auto 0 auto; /* Añadir más espacio arriba */
+            padding: 20px;
+            border: 5px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group input[type="submit"] {
+          border-radius: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #2d6e30;
+        }
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
+        .center{
+          margin: 1px;
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="center">Formulario de Contacto</h2>
+    <h4 class="center">Decoraciones Corintions</h4>
+    <form id="contactForm">
+        <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name">
+            <div class="error" id="nameError"></div>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email">
+            <div class="error" id="emailError"></div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Número Telefónico:</label>
+            <input type="tel" id="phone" name="phone">
+            <div class="error" id="phoneError"></div>
+        </div>
+        <div class="form-group">
+            <label for="service">Tipo de Servicio Deseado:</label>
+            <select id="service" name="service">
+                <option value="">Seleccione un servicio</option>
+                <option value="consulta">Consulta</option>
+                <option value="soporte">Instalacion</option>
+                <option value="otros">Solicita un catalogo mas amplio</option>
+                <option value="otros">Desea programar una cita con nosotros</option>
+            </select>
+            <div class="error" id="serviceError"></div>
+        </div>
+        <div class="form-group">
+            <label for="message">Mensaje:</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+            <div class="error" id="messageError"></div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Enviar">
+        </div>
+        <h4 class="center">Telefono: +95213396</h4>
+    </form>
+</div>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var isValid = true;
+
+        // Validación del nombre
+        var name = document.getElementById('name').value;
+        if (name === '') {
+            isValid = false;
+            document.getElementById('nameError').innerText = 'Por favor ingrese su nombre.';
+        } else {
+            document.getElementById('nameError').innerText = '';
+        }
+
+        // Validación del correo electrónico
+        var email = document.getElementById('email').value;
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (email === '') {
+            isValid = false;
+            document.getElementById('emailError').innerText = 'Por favor ingrese su correo electrónico.';
+        } else if (!emailPattern.test(email)) {
+            isValid = false;
+            document.getElementById('emailError').innerText = 'Por favor ingrese un correo electrónico válido.';
+        } else {
+            document.getElementById('emailError').innerText = '';
+        }
+
+        // Validación del número telefónico
+        var phone = document.getElementById('phone').value;
+        if (phone === '') {
+            isValid = false;
+            document.getElementById('phoneError').innerText = 'Por favor ingrese su número telefónico.';
+        } else {
+            document.getElementById('phoneError').innerText = '';
+        }
+
+        // Validación del tipo de servicio
+        var service = document.getElementById('service').value;
+        if (service === '') {
+            isValid = false;
+            document.getElementById('serviceError').innerText = 'Por favor seleccione un tipo de servicio.';
+        } else {
+            document.getElementById('serviceError').innerText = '';
+        }
+
+        // Validación del mensaje
+        var message = document.getElementById('message').value;
+        if (message === '') {
+            isValid = false;
+            document.getElementById('messageError').innerText = 'Por favor ingrese su mensaje.';
+        } else {
+            document.getElementById('messageError').innerText = '';
+        }
+
+        // Si todo es válido, enviar el formulario
+        if (isValid) {
+            alert('Formulario enviado con éxito!');
+            document.getElementById('contactForm').reset();
+        }
+    });
+</script>
+
+</body>
+</html>
